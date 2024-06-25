@@ -21,8 +21,9 @@ export class SearchService {
 
   private async buildWhereClause(children: any[]): Promise<any> {
     const conditions: any[] = [];
-    
-    for (const child of children) {
+    const childrens = Object.values(children);
+
+    for (const child of childrens) {
       if (child.type === 'RULE') {
         conditions.push(await this.buildRuleCondition(child.properties));
       } else if (child.type === 'GROUP' && child.condition === 'And') {
