@@ -9,7 +9,7 @@ export class SearchService {
 
   async getEmployees(search: any): Promise<Employee[]> {
     const whereClause = await this.buildWhereClause(search.children);
-
+    
     return await this.prisma.employee.findMany({
       where: whereClause,
       include: {
@@ -38,7 +38,7 @@ export class SearchService {
     const condition: any = {};
 
     if (properties.type === 'Skill') {
-      condition.skills = { some: { stack: properties.stack, experience: properties.experience, seniority: properties.seniority } };
+      condition.skills = { some: { name: properties.name, experience: properties.experience, seniority: properties.seniority } };
     } else if (properties.type === 'Position') {
       condition.positions = { some: { name: properties.positions } };
     }
