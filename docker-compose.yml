@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: lucasuser
+      POSTGRES_PASSWORD: lucaspass
+      POSTGRES_DB: zealousdb
+    ports:
+      - 5499:5432
+
