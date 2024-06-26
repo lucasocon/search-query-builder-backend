@@ -1,14 +1,17 @@
+import { SearchType, Operator, SkillType, Seniority, NodeType, Condition } from '../enums/search.enum';
+
+export interface RuleProperties {
+  type: SearchType;
+  operator: Operator; 
+  name?: SkillType;
+  experience?: number;
+  seniority?: Seniority;
+}
+
 export interface SearchNode {
-  type: string;
-  condition?: string;
+  type: NodeType;
+  condition?: Condition;
   children?: { [key: string]: SearchNode };
   properties?: RuleProperties;
 }
 
-export interface RuleProperties {
-  type: string;
-  operator: string;
-  name?: string;
-  experience?: number;
-  seniority?: string;
-}

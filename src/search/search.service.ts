@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { Employee } from '@prisma/client';
 import { SearchNode, RuleProperties } from 'src/interfaces/search.interfaces';
+import { SearchType, Operator, NodeType, Condition } from 'src/enums/search.enum';
 
 @Injectable()
 export class SearchService {
@@ -20,13 +21,13 @@ export class SearchService {
   }
 
   private async buildWhereClause(node: SearchNode): Promise<any> {
-    if (node.type === 'GROUP') {
+    if (node.type === NodeType.GROUP) {
       const conditions = await Promise.all(
         Object.values(node.children).map(child => this.buildWhereClause(child))
       );
 
-      return node.condition === 'And' ? { AND: conditions } : { OR: conditions };
-    } else if (node.type === 'RULE') {
+      return node.condition === Condition.AND ? { AND: conditions } : { OR: conditions };
+    } else if (node.type === NodeType.RULE) {
       return this.buildRuleCondition(node.properties);
     }
   }
@@ -34,7 +35,7 @@ export class SearchService {
   private buildRuleCondition(properties: RuleProperties): any {
     const condition: any = {};
 
-    if (properties.type === 'Skill') {
+    if (properties.type === SearchType.SKILL) {
       condition.skills = {
         some: {
           name: this.applyOperator(properties.operator, properties.name),
@@ -42,7 +43,7 @@ export class SearchService {
           seniority: this.applyOperator(properties.operator, properties.seniority),
         },
       };
-    } else if (properties.type === 'Position') {
+    } else if (properties.type === SearchType.POSITION) {
       condition.positions = {
         some: {
           name: this.applyOperator(properties.operator, properties.name),
@@ -53,15 +54,14 @@ export class SearchService {
     return condition;
   }
 
-  private applyOperator(operator: string, value: any): any {
+  private applyOperator(operator: Operator, value: any): any {
     switch (operator) {
-      case 'equal':
+      case Operator.EQUAL:
         return value;
-      case 'not_equal':
+      case Operator.NOT_EQUAL:
         return { not: value };
       default:
         throw new Error(`Unsupported operator: ${operator}`);
     }
   }
 }
-
