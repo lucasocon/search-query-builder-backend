@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '../prisma.service';
 import { Employee } from '@prisma/client';
 import { SearchNode, RuleProperties } from 'src/interfaces/search.interfaces';
-import { SearchType, Operator, NodeType, Condition } from 'src/enums/search.enum';
+import { SearchType, Operator, NodeType, Condition } from '../enums/search.enum';
 
 @Injectable()
 export class SearchService {
