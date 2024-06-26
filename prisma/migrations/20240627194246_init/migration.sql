@@ -13,7 +13,7 @@ CREATE TABLE "Employee" (
 CREATE TABLE "Skill" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "experience" INTEGER NOT NULL,
+    "experience" TEXT NOT NULL,
     "seniority" TEXT NOT NULL,
     "employeeId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

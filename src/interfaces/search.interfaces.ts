@@ -4,7 +4,7 @@ export interface RuleProperties {
   type: SearchType;
   operator: Operator; 
   name?: SkillType | Position;
-  experience?: number;
+  experience?: string;
   seniority?: Seniority;
 }
 

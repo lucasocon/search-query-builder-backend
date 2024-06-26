@@ -22,7 +22,7 @@ model Employee {
 model Skill {
   id         Int @id @default(autoincrement())
   name       String
-  experience Int
+  experience String
   seniority  String
 
   employeeId Int

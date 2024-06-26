@@ -22,8 +22,8 @@ export enum NodeType {
 }
 
 export enum Condition {
-  AND = 'And',
-  OR = 'Or'
+  AND = 'AND',
+  OR = 'OR'
 }
 
 export enum Seniority {

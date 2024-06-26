@@ -54,7 +54,7 @@ export class SearchService {
     return condition;
   }
 
-  private applyOperator(operator: Operator, value: any): any {
+  private applyOperator(operator: Operator, value: string | number): any {
     switch (operator) {
       case Operator.EQUAL:
         return value;
