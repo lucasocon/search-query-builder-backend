@@ -31,3 +31,12 @@ export enum Seniority {
   MID = 'Mid',
   SENIOR = 'Senior'
 }
+
+export enum Position {
+  BACKEND_DEVELOPER = 'Backend Developer',
+  FULLSTACK_DEVELOPER = 'Fullstack Developer',
+  FRONTEND_DEVELOPER = 'Frontend Developer',
+  DEVOPS = 'DevOps',
+  QA = 'QA',
+}
+
