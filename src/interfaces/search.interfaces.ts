@@ -1,9 +1,9 @@
-import { SearchType, Operator, SkillType, Seniority, NodeType, Condition } from '../enums/search.enum';
+import { SearchType, Operator, SkillType, Seniority, NodeType, Condition, Position } from '../enums/search.enum';
 
 export interface RuleProperties {
   type: SearchType;
   operator: Operator; 
-  name?: SkillType;
+  name?: SkillType | Position;
   experience?: number;
   seniority?: Seniority;
 }
