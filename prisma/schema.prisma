@@ -8,37 +8,32 @@ datasource db {
 }
 
 model Employee {
-  id        Int @id @default(autoincrement())
-  email     String @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   name      String?
-
-  skills     Skill[]
-  positions   Position[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  positions Position[]
+  skills    Skill[]
 }
 
 model Skill {
-  id         Int @id @default(autoincrement())
-  name       String
-  experience String
-  seniority  String
-
-  employeeId Int
-  employee   Employee? @relation(fields: [employeeId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int       @id @default(autoincrement())
+  name         String
+  experience   String
+  seniority    String
+  employeeId   Int
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  lastWorkedAt DateTime?
+  employee     Employee  @relation(fields: [employeeId], references: [id])
 }
 
 model Position {
-  id        Int      @id @default(autoincrement()) 
-  name      String
-
+  id         Int      @id @default(autoincrement())
+  name       String
   employeeId Int
-  employee   Employee? @relation(fields: [employeeId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  employee   Employee @relation(fields: [employeeId], references: [id])
 }
