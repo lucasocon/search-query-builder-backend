@@ -7,8 +7,8 @@ export enum SkillType {
 }
 
 export enum SearchType {
-  SKILL = 'Skill',
-  POSITION = 'Position'
+  SKILLS = 'Skills',
+  POSITIONS = 'Positions'
 }
 
 export enum Operator {
@@ -17,8 +17,8 @@ export enum Operator {
 }
 
 export enum NodeType {
-  GROUP = 'GROUP',
-  RULE = 'RULE'
+  GROUP = 'group',
+  RULE = 'rule'
 }
 
 export enum Condition {

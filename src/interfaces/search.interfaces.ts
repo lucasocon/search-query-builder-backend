@@ -6,12 +6,13 @@ export interface RuleProperties {
   name?: SkillType | Position;
   experience?: string;
   seniority?: Seniority;
+  lastWorkedAt?: string
 }
 
 export interface SearchNode {
   type: NodeType;
   condition?: Condition;
-  children?: { [key: string]: SearchNode };
+  childrens?: { [key: string]: SearchNode };
   properties?: RuleProperties;
 }
 
