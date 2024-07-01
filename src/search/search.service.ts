@@ -23,7 +23,7 @@ export class SearchService {
   private async buildWhereClause(node: SearchNode): Promise<any> {
     if (node.type === NodeType.GROUP) {
       const conditions = await Promise.all(
-        Object.values(node.children).map(child => this.buildWhereClause(child))
+        Object.values(node.childrens).map(child => this.buildWhereClause(child))
       );
 
       return node.condition === Condition.AND ? { AND: conditions } : { OR: conditions };
@@ -35,15 +35,23 @@ export class SearchService {
   private buildRuleCondition(properties: RuleProperties): any {
     const condition: any = {};
 
-    if (properties.type === SearchType.SKILL) {
+    if (properties.type === SearchType.SKILLS) {
       condition.skills = {
         some: {
           name: this.applyOperator(properties.operator, properties.name),
           experience: this.applyOperator(properties.operator, properties.experience),
           seniority: this.applyOperator(properties.operator, properties.seniority),
+          lastWorkedAt: this.handleDateFilter(properties.lastWorkedAt),
         },
       };
-    } else if (properties.type === SearchType.POSITION) {
+
+      if (properties.lastWorkedAt) {
+        const formattedDate = properties.lastWorkedAt.split('-').reverse().join('-');
+        const isoDate = new Date(formattedDate).toISOString();
+
+        condition.skills.some.lastWorkedAt = { lte: isoDate}
+      }
+    } else if (properties.type === SearchType.POSITIONS) {
       condition.positions = {
         some: {
           name: this.applyOperator(properties.operator, properties.name),
@@ -62,6 +70,19 @@ export class SearchService {
         return { not: value };
       default:
         throw new Error(`Unsupported operator: ${operator}`);
+    }
+  }
+
+  private handleDateFilter(dateString?: string): any {
+    if (!dateString) return;
+
+    try {
+      const formattedDate = dateString.split('-').reverse().join('-');
+      const isoDate = new Date(formattedDate).toISOString();
+      return { lte: isoDate };
+    } catch (error) {
+      console.error('Invalid date format:', dateString);
+      return undefined;
     }
   }
 }

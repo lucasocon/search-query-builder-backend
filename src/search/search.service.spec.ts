@@ -36,14 +36,14 @@ describe('SearchService', () => {
       const searchNode: SearchNode = {
         type: NodeType.GROUP,
         condition: Condition.AND,
-        children: {
+        childrens: {
           rule1: {
             type: NodeType.RULE,
             properties: {
-              type: SearchType.SKILL,
+              type: SearchType.SKILLS,
               operator: Operator.EQUAL,
               name: SkillType.NODEJS,
-              experience: 2,
+              experience: '2',
               seniority: Seniority.SENIOR,
             },
           },
@@ -70,24 +70,24 @@ describe('SearchService', () => {
       const searchNode: SearchNode = {
         type: NodeType.GROUP,
         condition: Condition.OR,
-        children: {
+        childrens: {
           rule1: {
             type: NodeType.RULE,
             properties: {
-              type: SearchType.SKILL,
+              type: SearchType.SKILLS,
               operator: Operator.EQUAL,
               name: SkillType.NODEJS,
-              experience: 2,
+              experience: '2',
               seniority: Seniority.SENIOR,
             },
           },
           rule2: {
             type: NodeType.RULE,
             properties: {
-              type: SearchType.SKILL,
+              type: SearchType.SKILLS,
               operator: Operator.EQUAL,
               name: SkillType.RUBY,
-              experience: 1,
+              experience: '1',
               seniority: Seniority.JUNIOR,
             },
           },
@@ -123,10 +123,10 @@ describe('SearchService', () => {
   describe('buildRuleCondition', () => {
     it('should build a rule condition for skills correctly', () => {
       const properties: RuleProperties = {
-        type: SearchType.SKILL,
+        type: SearchType.SKILLS,
         operator: Operator.EQUAL,
         name: SkillType.NODEJS,
-        experience: 2,
+        experience: '2',
         seniority: Seniority.SENIOR,
       };
 
@@ -144,7 +144,7 @@ describe('SearchService', () => {
 
     it('should build a rule condition for positions correctly', () => {
       const properties: RuleProperties = {
-        type: SearchType.POSITION,
+        type: SearchType.POSITIONS,
         operator: Operator.EQUAL,
         name: Position.BACKEND_DEVELOPER,
       };
